@@ -1,5 +1,43 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  width: 100vw;
+  height: 100vh;
+} 
+.RecipeSection {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 400px);
+  grid-column-gap: 30px;
+  justify-content: center;
+  align-content: center;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+footer {
+  background: #3F51B5;
+  color: white;
+  text-align: center;
+  box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.6);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.link {
+  color: #EC407A;
+  text-decoration: none;
+}
+
+.link:hover, .link:focus {
+outline: none;
+color: #D81B60;
+}
+
+.link:active {
+outline: none;
+color: #D81B60;
 }

@@ -1,20 +1,25 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-const listHasRecipe = (list, recipe) => {
-    return list.find(element => element.name === recipe.name);
-}
-const listRecipeIndex = (list, recipe) => {
-    return list.findIndex(element => element.name === recipe.name);
-}
+
+const CapitalizeFirstLeter = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const listHasRecipe = (list, recipe) => list.find(element => element.name.toUpperCase() === recipe.name.toUpperCase());
+
+const listRecipeIndex = (list, recipe) => (list === null 
+    ? null
+    : list.findIndex(element => element.name.toUpperCase() === recipe.name.toUpperCase())
+);
 
 const addRecipe = (list, newRecipe) => {
+    if(newRecipe.name.length === 0 ||
+        newRecipe.ingredients.length === 0) return list;
     if(listHasRecipe(list, newRecipe))
         return list;
     return [
         ...list,
         {
-            name: newRecipe.name,
-            ingredients: newRecipe.ingredients,
+            name: CapitalizeFirstLeter(newRecipe.name),
+            ingredients: newRecipe.ingredients.map(v => CapitalizeFirstLeter(v)),
         }
     ];
 }
@@ -25,10 +30,10 @@ const editRecipe = (list, newRecipe) => {
     return [
         ...list.slice(0, index),
         {
-            name: newRecipe.name,
-            ingredients: newRecipe.ingredients,
+            name: CapitalizeFirstLeter(newRecipe.name),
+            ingredients: newRecipe.ingredients.map(v => CapitalizeFirstLeter(v)),
         },
-        ...list.slice(index + 2)
+        ...list.slice(index + 1)
     ]
     
 }
